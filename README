@@ -1,0 +1,44 @@
+Start or stop the air-coditioners at Oracle Aoyama Center by CUI.
+Only Oracle employees can use this program.
+
+ ***
+
+[USAGE] oacairctl [-sxV] -h <HOST> -u <USER> -p <PASSWORD> <COMMAND> <POSITION_ID> [<POSITION_ID> ... ]
+
+COMMAND:
+  start            Start the air-conditioner at <POSITION_ID>
+  stop             Stop the air-conditioner at <POSITION_ID>
+  status           Get status of the air-conditioner at <POSITION_ID>
+
+POSITION_ID:
+  This is a unique number. You can get it by the below
+
+  1. Get the URL of the air-conditioner site from "Facility: Guide/FAQ"
+  2. Login the site by graphical web browser like Firefox.
+  3. Choose your floor
+  4. Get ready to capture HTTP request by such as Live HTTP Headers add-on
+  5. Choose your duct
+  6. kcode in GET request is a POSITION_ID
+
+  List separated by space when you control multiple ducts at the same time
+
+OPTION:
+  -h, --host        Host of URL. Get it from "Facility: Guide/FAQ"
+                    Do not include any protoctol, path or files
+                    OK example) www.oracle.com   192.168.0.1
+                    NG example) www.oracle.com/jp/   http://192.168.0.1/foo.php
+  -u, --user        Username. Get it from "Facility: Guide/FAQ"
+  -p, --password    Password. Get it from "Facility: Guide/FAQ"
+  -s, --sleep       Set maximum sleep seconds. This program sleeps in random
+                    soconds between 0 and this value before start due to
+                    fluctuation.
+                    The default is 0. Start immediately when the value is 0
+  -x, --proxy       Proxy URL
+                    OK exmaple) http://proxy.oracle.com:80/
+  -V, --version     Output version information and exit
+
+RETURN CODE:
+  0                 Success
+  1                 Error but you can fix yourself
+  2                 Critical Error
+ -1                 Unexpected Error. File a bug
